@@ -12,9 +12,11 @@ public class UIManager : MonoBehaviour
     //private List<GameObject> uiCanvases;
     private Dictionary<string, GameObject> uiDictionary;
 
-    private Button mainMenuButton_aboutScene;
-    private Button mainMenuButton_creditsScene;
+    private Button mainMenuButton_about;
+    private Button mainMenuButton_credits;
     private Button mainMenuButton_quit;
+
+    private static int winSceneIndex = 2;
 
     private void Awake()
     {
@@ -59,10 +61,15 @@ public class UIManager : MonoBehaviour
 
         mainMenuButton_quit = GameObject.Find("Button_Quit").GetComponent<Button>();
         mainMenuButton_quit.onClick.AddListener(() => quitGame(0));
+
+        mainMenuButton_about = GameObject.Find("Button_About").GetComponent<Button>();
+        // just testing scene transition
+        mainMenuButton_about.onClick.AddListener(() => showWinScene());
     }
 
     public void loadSceneByNumber(int sceneNum)
     {
+        setAllCanvasesToInactive();
         SceneManager.LoadScene(sceneNum);
     }
 
@@ -87,7 +94,10 @@ public class UIManager : MonoBehaviour
         }  
     }
 
-
+    public void showWinScene()
+    {
+        loadSceneByNumber(winSceneIndex);
+    }
 
     public void quitGame(int ignoreLevel)
     {
