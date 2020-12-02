@@ -49,16 +49,16 @@ public class TimerManager : MonoBehaviour
         timerIsRunning = true;
         // will have to change these to the time we want and
         // the levels they correspond to
-        if (level == 1)
+        if (level == 4)
         {
-            timeRemaining = 50f;
+            timeRemaining = 10f;
             resetTime = timeRemaining;
         }
-        if(level == 2)
+        /*if(level == level2Index)
         {
             timeRemaining = 100f;
             resetTime = timeRemaining;
-        }
+        }*/
     }
 
     public string getTimeRemaining()

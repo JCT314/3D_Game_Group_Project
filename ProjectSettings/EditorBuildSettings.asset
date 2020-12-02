@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Winning_Scene.unity
     guid: a1899d126db294940b52d31bbeb52996
+  - enabled: 1
+    path: Assets/Scenes/Scene_Level_Selection.unity
+    guid: c76b44e8f63ce4041adf761adff3d9e6
+  - enabled: 1
+    path: Assets/Scenes/Scene_Example_Level_1.unity
+    guid: 8a7936a98cc69674fbf6df487523fd86
+  - enabled: 1
+    path: Assets/Scenes/Scene_Example_Level_2.unity
+    guid: c3c7bbba3ca8dd54dada13248ee191f6
   m_configObjects: {}
