@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     private Button winMenuButton_mainMenu;
     private Button winMenuButton_levelSelect;
 
+    private Button level1Button_quit;
+    private Button level1Button_mainMenu;
+
     private Button level1Button;
     private Button level2Button;
     private Text level2Text;
@@ -115,6 +118,7 @@ public class UIManager : MonoBehaviour
         // inside level selection scene
         if(index == levelSelect)
         {
+
             activateCanvas("Canvas_Level_Selection");
             if(level1Button == null)
             {
@@ -155,6 +159,23 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        if(index == level1)
+        {
+            activateCanvas("Canvas_EasyGame");
+            if(level1Button_mainMenu == null)
+            {
+                Debug.Log("clicked main menu");
+                level1Button_mainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
+                level1Button_mainMenu.onClick.AddListener(() => loadSceneByNumber(1));
+                
+            }
+            if(level1Button_quit == null)
+            {
+                level1Button_quit = GameObject.Find("Button_Quit").GetComponent<Button>();
+                level1Button_quit.onClick.AddListener(() => quitGame(0));
+            }
+        }
+
         // inside win scene
         if(index == winSceneIndex)
         {
@@ -163,6 +184,7 @@ public class UIManager : MonoBehaviour
             {
                 winMenuButton_levelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
                 winMenuButton_levelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+               
             }
 
             if(winMenuButton_mainMenu == null)
