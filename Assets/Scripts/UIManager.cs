@@ -20,10 +20,16 @@ public class UIManager : MonoBehaviour
     private Button winMenuButton_mainMenu;
     private Button winMenuButton_levelSelect;
 
+    // ui in level selection scene
     private Button level1Button;
     private Button level2Button;
+    private Dictionary<string, Image> badges;
     private Text level2Text;
     private GameObject lockImage;
+    private bool hasSpeedBadge1 = false;
+    private bool hasSpeedBadge2 = false;
+    private bool hasGearsBadge1 = false;
+    private bool hasGearsBadge2 = false;
 
     private static int totalLevels = 2;
     private static bool[] levels = new bool[totalLevels];
@@ -116,6 +122,17 @@ public class UIManager : MonoBehaviour
         if(index == levelSelect)
         {
             activateCanvas("Canvas_Level_Selection");
+            //test this
+            if(badges == null)
+            {
+                badges = loadBadgesToDictionary();
+                //levels[0] = true;
+                //beatLevel1WithSpeed();
+                //beatLevel2WithSpeed();
+                //collectedAllGearsInLevel1();
+                //collectedAllGearsInLevel2();
+            }
+
             if(level1Button == null)
             {
                 level1Button = GameObject.Find("Button_Level_1").GetComponent<Button>();
@@ -140,8 +157,9 @@ public class UIManager : MonoBehaviour
                 lockImage = GameObject.Find("Lock");
             }
 
+            checkForBadges();
             // check if first level is beaten
-            if(levels[0] == true)
+            if (levels[0] == true)
             {
                 lockImage.SetActive(false);
                 level2Text.text = "Level 2";
@@ -149,6 +167,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                badges["Speed_Badge_Shadow_2"].enabled = false;
+                badges["Gears_Badge_Shadow_2"].enabled = false;
                 lockImage.SetActive(true);
                 level2Text.text = "";
                 level2Button.enabled = false;
@@ -177,6 +197,95 @@ public class UIManager : MonoBehaviour
                 winMenuButton_nextLevel.onClick.AddListener(() => loadSceneByNumber(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
+    }
+
+    public void checkForBadges()
+    {
+        if(hasGearsBadge1)
+        {
+            badges["Gears_Badge_1"].enabled = true;
+            badges["Gears_Badge_Shadow_1"].enabled = false;
+        }
+        else
+        {
+            badges["Gears_Badge_1"].enabled = false;
+            badges["Gears_Badge_Shadow_1"].enabled = true;
+        }
+
+        if (hasGearsBadge2)
+        {
+            badges["Gears_Badge_2"].enabled = true;
+            badges["Gears_Badge_Shadow_2"].enabled = false;
+        }
+        else
+        {
+            badges["Gears_Badge_2"].enabled = false;
+            badges["Gears_Badge_Shadow_2"].enabled = true;
+        }
+
+        if (hasSpeedBadge1)
+        {
+            badges["Speed_Badge_1"].enabled = true;
+            badges["Speed_Badge_Shadow_1"].enabled = false;
+        }
+        else
+        {
+            badges["Speed_Badge_1"].enabled = false;
+            badges["Speed_Badge_Shadow_1"].enabled = true;
+        }
+
+        if (hasSpeedBadge2)
+        {
+            badges["Speed_Badge_2"].enabled = true;
+            badges["Speed_Badge_Shadow_2"].enabled = false;
+        }
+        else
+        {
+            badges["Speed_Badge_2"].enabled = false;
+            badges["Speed_Badge_Shadow_2"].enabled = true;
+        }
+    }
+
+    public void beatLevel1WithSpeed()
+    {
+        hasSpeedBadge1 = true;
+    }
+
+    public void collectedAllGearsInLevel1()
+    {
+        hasGearsBadge1 = true;
+    }
+
+    public void beatLevel2WithSpeed()
+    {
+        hasSpeedBadge2 = true;
+    }
+
+    public void collectedAllGearsInLevel2()
+    {
+        hasGearsBadge2 = true;
+    }
+
+    public Dictionary<string,Image> loadBadgesToDictionary()
+    {
+        Dictionary<string, Image> imageDictionary = new Dictionary<string, Image>();
+        Image temp = GameObject.Find("Gears_Badge_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_Shadow_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_Shadow_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_Shadow_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_Shadow_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        return imageDictionary;
     }
 
     public void setLevelBeaten(int levelNumber)
