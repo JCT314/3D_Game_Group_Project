@@ -13274,7 +13274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b30389d58b405438a27ded70ca959e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1549310171}
+  player: {fileID: 1860137049}
   zHeight: -5
   yHeight: 1
 --- !u!1001 &700805432
@@ -30073,7 +30073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1528915638184230, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4431084402279646, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30762,7 +30762,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549310171}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 678e037843b40004d82eca2d0ea19e9a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -37590,7 +37590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &1860137050
 SphereCollider:
   m_ObjectHideFlags: 0
