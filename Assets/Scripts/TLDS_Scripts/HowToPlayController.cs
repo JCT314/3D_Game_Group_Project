@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HowToPlayController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class HowToPlayController : MonoBehaviour
 
         //Obtain buttons
         back_button = GameObject.Find("Back_Button").GetComponent<Button>();
+        // Adding function to back button to go back to the main menu
+        back_button.onClick.AddListener(() => SceneManager.LoadScene(1));
         repeat_button = GameObject.Find("Repeat_Button").GetComponent<Button>();
 
         //For ease of acces, Sprites are placed in Array (U,D,L,R)
