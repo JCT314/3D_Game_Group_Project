@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gear_Rotate : MonoBehaviour
 {
-
+    public AudioClip gearSound;
 
     // Update is called once per frame
     void Update()
@@ -16,6 +16,7 @@ public class Gear_Rotate : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            AudioSource.PlayClipAtPoint(gearSound, transform.position);
             Destroy(gameObject);
         }
     }
