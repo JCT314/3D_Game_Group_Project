@@ -13,6 +13,7 @@ public class GameFunctions : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+
     public void LoadSceneByInt(int scene_number)
     {
         SceneManager.LoadScene(scene_number);
