@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
 
+    // level 1 buttons
     private Button level1Button_quit;
     private Button level1Button_mainMenu;
 
@@ -124,7 +125,7 @@ public class UIManager : MonoBehaviour
         if (index == mainMenu)
         {
             activateCanvas("Canvas_Main_Menu");
-        }  
+        }
 
         // inside level selection scene
         if(index == levelSelect)
@@ -193,7 +194,7 @@ public class UIManager : MonoBehaviour
                 Debug.Log("clicked main menu");
                 level1Button_mainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
                 level1Button_mainMenu.onClick.AddListener(() => loadSceneByNumber(1));
-                
+
             }
             if(level1Button_quit == null)
             {
