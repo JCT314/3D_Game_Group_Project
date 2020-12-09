@@ -67,7 +67,7 @@ public class TimerManager : MonoBehaviour
         int seconds;
         minutes = totalSecondsLeft / 60;
         seconds = totalSecondsLeft % 60;
-        string time = minutes.ToString() + ":" + seconds;
+        string time = minutes.ToString() + ":" + (seconds < 10?"0":"") + seconds;
         return time;
     }
 
