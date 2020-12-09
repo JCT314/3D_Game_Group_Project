@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> list_Of_Prefabs;
 
     private Dictionary<string, GameObject> uiDictionary;
+    private TimerManager timer;
 
     // main scene buttons
     private Button mainButtonPlay;
@@ -21,6 +22,10 @@ public class UIManager : MonoBehaviour
     private Button winButtonNextLevel;
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
+
+    // HUD
+    private Text hudGears;
+    private Text hudTime;
 
     private Button level1Button_quit;
     private Button level1Button_mainMenu;
@@ -51,6 +56,7 @@ public class UIManager : MonoBehaviour
         if (_instance == null)
         {
             uiDictionary = new Dictionary<string, GameObject>();
+            timer = GameObject.Find("TimerManager").GetComponent<TimerManager>();
 
             _instance = this;
             DontDestroyOnLoad(this);
@@ -71,6 +77,21 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        if(currentIndex == level1 || currentIndex == level2)
+        {
+            updateHUD();
+        }
+    }
+
+    private void updateHUD()
+    {
+        hudTime.text = "TIME " + timer.getTimeRemaining();
+        hudGears.text = "GEARS: " + "need to add gears";
     }
 
     public void setAllCanvasesToInactive()
@@ -109,6 +130,12 @@ public class UIManager : MonoBehaviour
     public void activateCanvas(string canvasName)
     {
         setAllCanvasesToInactive();
+        GameObject go = uiDictionary[canvasName];
+        go.SetActive(true);
+    }
+
+    public void activateAdditionalCanvas(string canvasName)
+    {
         GameObject go = uiDictionary[canvasName];
         go.SetActive(true);
     }
@@ -202,8 +229,29 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        // still need level 2
+        if(index == level2)
+        {
+
+        }
+
+        // display heads up display if we are in either level
+        if (index == level1 || index == level2)
+        {
+            activateAdditionalCanvas("Canvas_HUD");
+            if (hudGears == null)
+            {
+                hudGears = GameObject.Find("Gears_Collected_Text").GetComponent<Text>();
+            }
+
+            if (hudTime == null)
+            {
+                hudTime = GameObject.Find("Timer_Text").GetComponent<Text>();
+            }
+        }
+
         // inside win scene
-        if(index == winSceneIndex)
+        if (index == winSceneIndex)
         {
             activateCanvas("Canvas_Win");
             if(winButtonLevelSelect == null)

@@ -9,6 +9,8 @@ public class TimerManager : MonoBehaviour
     private int totalSecondsLeft;
     private float resetTime;
     public static TimerManager _instance;
+    private int level1 = 4;
+    private int level2 = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -49,16 +51,16 @@ public class TimerManager : MonoBehaviour
         timerIsRunning = true;
         // will have to change these to the time we want and
         // the levels they correspond to
-        if (level == 4)
+        if (level == level1)
         {
             timeRemaining = 10f;
             resetTime = timeRemaining;
         }
-        /*if(level == level2Index)
+        if (level == level2)
         {
             timeRemaining = 100f;
             resetTime = timeRemaining;
-        }*/
+        }
     }
 
     public string getTimeRemaining()
@@ -67,7 +69,7 @@ public class TimerManager : MonoBehaviour
         int seconds;
         minutes = totalSecondsLeft / 60;
         seconds = totalSecondsLeft % 60;
-        string time = minutes.ToString() + ":" + seconds;
+        string time = minutes.ToString() + ":" + (seconds < 10 ? "0" : "") + seconds;
         return time;
     }
 
