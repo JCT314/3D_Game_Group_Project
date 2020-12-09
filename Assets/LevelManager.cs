@@ -61,4 +61,18 @@ public class LevelManager : MonoBehaviour
 
         return gearsCollected.ToString() + "/" + totalGears;
     }
+
+    public bool didPlayerCollectAllGears()
+    {
+        bool flag = false;
+        if(currentLevel == level1)
+        {
+            flag = gearsCollected == gearsInLevel1;
+        }
+        else if(currentLevel == level2)
+        {
+            flag = gearsCollected == gearsInLevel2;
+        }
+        return flag;
+    }
 }

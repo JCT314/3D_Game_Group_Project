@@ -9,8 +9,12 @@ public class TimerManager : MonoBehaviour
     private int totalSecondsLeft;
     private int level1 = 4;
     private int level2 = 5;
-    private float timeForLevel1 = 20;
-    private float timeForLevel2 = 10;
+    private int timeGoal = -1;
+    private float totalTimeForLevel1 = 20f;
+    private int timeToBeatLevel1 = 9;
+    // need to adjust level 2
+    private float totalTimeForLevel2 = 10f;
+    private int timeToBeatLevel2 = 20;
     private float resetTime;
     public static TimerManager _instance;
     public UIManager uiManager;
@@ -57,15 +61,20 @@ public class TimerManager : MonoBehaviour
         // the levels they correspond to
         if (level == level1)
         {
-            timeRemaining = timeForLevel1;
+            timeRemaining = totalTimeForLevel1;
             timerIsRunning = true;
             resetTime = timeRemaining;
+            timeGoal = timeToBeatLevel1;
         }
         /*if(level == level2Index)
         {
             timeRemaining = 100f;
             resetTime = timeRemaining;
         }*/
+        if(level != level1 && level != level2)
+        {
+            timerIsRunning = false;
+        }
     }
 
     public string getTimeRemaining()
@@ -81,8 +90,13 @@ public class TimerManager : MonoBehaviour
     public int getTimeUsedToBeatLevel()
     {
         int totalTime = (int)resetTime - totalSecondsLeft;
-        Debug.Log(totalTime);
+        //Debug.Log(totalTime);
         return totalTime;
+    }
+
+    public bool didPlayerBeatLevelInTime()
+    {
+        return getTimeUsedToBeatLevel() >= timeGoal;
     }
 
     public void resetTimer()
