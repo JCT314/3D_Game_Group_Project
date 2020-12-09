@@ -22,7 +22,13 @@ public class UIManager : MonoBehaviour
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
 
+<<<<<<< Assets/Scripts/UIManager.cs
+    private Button level1Button_quit;
+    private Button level1Button_mainMenu;
+
+=======
     // ui in level selection scene
+>>>>>>> Assets/Scripts/UIManager.cs
     private Button level1Button;
     private Button level2Button;
     private Dictionary<string, Image> badges;
@@ -127,6 +133,7 @@ public class UIManager : MonoBehaviour
         // inside level selection scene
         if(index == levelSelect)
         {
+
             activateCanvas("Canvas_Level_Selection");
             //test this
             if(badges == null)
@@ -182,14 +189,37 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        if(index == level1)
+        {
+            activateCanvas("Canvas_EasyGame");
+            if(level1Button_mainMenu == null)
+            {
+                Debug.Log("clicked main menu");
+                level1Button_mainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
+                level1Button_mainMenu.onClick.AddListener(() => loadSceneByNumber(1));
+                
+            }
+            if(level1Button_quit == null)
+            {
+                level1Button_quit = GameObject.Find("Button_Quit").GetComponent<Button>();
+                level1Button_quit.onClick.AddListener(() => quitGame(0));
+            }
+        }
+
         // inside win scene
         if(index == winSceneIndex)
         {
             activateCanvas("Canvas_Win");
             if(winButtonLevelSelect == null)
             {
+<<<<<<< Assets/Scripts/UIManager.cs
+                winMenuButton_levelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
+                winMenuButton_levelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+               
+=======
                 winButtonLevelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
                 winButtonLevelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+>>>>>>> Assets/Scripts/UIManager.cs
             }
 
             if(winButtonMainMenu == null)
