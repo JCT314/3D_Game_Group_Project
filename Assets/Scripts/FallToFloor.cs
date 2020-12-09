@@ -9,7 +9,7 @@ public class FallToFloor : MonoBehaviour
     {
         if (collide.gameObject.name == "Sphere")
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(7);
         }
     }
 }
