@@ -22,10 +22,8 @@ public class UIManager : MonoBehaviour
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
 
-
     private Button level1Button_quit;
     private Button level1Button_mainMenu;
-
 
     private Button level1Button;
     private Button level2Button;
@@ -210,10 +208,8 @@ public class UIManager : MonoBehaviour
             activateCanvas("Canvas_Win");
             if(winButtonLevelSelect == null)
             {
-
                 winButtonLevelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
                 winButtonLevelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
-               
             }
 
             if(winButtonMainMenu == null)
