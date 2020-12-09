@@ -50,7 +50,7 @@ public class FinishLine : MonoBehaviour
                     uiManager.collectedAllGearsInLevel2();
                 }
             }
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }

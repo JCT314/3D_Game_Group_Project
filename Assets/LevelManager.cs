@@ -35,11 +35,11 @@ public class LevelManager : MonoBehaviour
             gearsCollected = 0;
             currentLevel = level1;
         }
-        /*if(level == level2Index)
+        if (level == level2)
         {
-            timeRemaining = 100f;
-            resetTime = timeRemaining;
-        }*/
+            gearsCollected = 0;
+            currentLevel = level2;
+        }
     }
 
     public void addGearCollected()
@@ -74,5 +74,10 @@ public class LevelManager : MonoBehaviour
             flag = gearsCollected == gearsInLevel2;
         }
         return flag;
+    }
+
+    public int getCurrentLevel()
+    {
+        return currentLevel;
     }
 }

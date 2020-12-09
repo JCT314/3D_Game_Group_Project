@@ -273,7 +273,12 @@ public class UIManager : MonoBehaviour
             if(winButtonNextLevel == null)
             {
                 winButtonNextLevel = GameObject.Find("Button_Next_Level").GetComponent<Button>();
-                winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(SceneManager.GetActiveScene().buildIndex + 1));
+                winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(level2));
+            }
+
+            if(levelManager.getCurrentLevel() == level2)
+            {
+                winButtonNextLevel.enabled = false;
             }
         }
 

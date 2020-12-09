@@ -66,12 +66,14 @@ public class TimerManager : MonoBehaviour
             resetTime = timeRemaining;
             timeGoal = timeToBeatLevel1;
         }
-        /*if(level == level2Index)
+        if (level == level2)
         {
-            timeRemaining = 100f;
+            timeRemaining = totalTimeForLevel2;
+            timerIsRunning = true;
             resetTime = timeRemaining;
-        }*/
-        if(level != level1 && level != level2)
+            timeGoal = timeToBeatLevel2;
+        }
+        if (level != level1 && level != level2)
         {
             timerIsRunning = false;
         }
