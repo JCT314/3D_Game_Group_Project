@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<string, GameObject> uiDictionary;
     private TimerManager timer;
+    private LevelManager levelManager;
 
     // main scene buttons
     private Button mainButtonPlay;
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
         {
             uiDictionary = new Dictionary<string, GameObject>();
             timer = GameObject.Find("TimerManager").GetComponent<TimerManager>();
+            levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
             _instance = this;
             DontDestroyOnLoad(this);
@@ -93,7 +95,7 @@ public class UIManager : MonoBehaviour
     private void updateHUD()
     {
         hudTime.text = "TIME " + timer.getTimeRemaining();
-        hudGears.text = "GEARS: " + "need to add gears";
+        hudGears.text = "GEARS: " + levelManager.getGearsStatus();
     }
 
     public void setAllCanvasesToInactive()
@@ -379,6 +381,11 @@ public class UIManager : MonoBehaviour
     public void showWinScene()
     {
         loadSceneByNumber(winSceneIndex);
+    }
+
+    public void showLoseScene()
+    {
+        loadSceneByNumber(loseSceneIndex);
     }
 
     public void quitGame(int ignoreLevel)

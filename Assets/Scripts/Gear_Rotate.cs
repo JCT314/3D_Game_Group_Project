@@ -5,6 +5,12 @@ using UnityEngine;
 public class Gear_Rotate : MonoBehaviour
 {
     public AudioClip gearSound;
+    private LevelManager levelManager;
+    private void Awake()
+    {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -16,6 +22,7 @@ public class Gear_Rotate : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            levelManager.addGearCollected();
             AudioSource.PlayClipAtPoint(gearSound, transform.position);
             Destroy(gameObject);
         }
