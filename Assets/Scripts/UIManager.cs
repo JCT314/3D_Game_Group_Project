@@ -11,22 +11,34 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<string, GameObject> uiDictionary;
 
-    private Button mainMenuButton_play;
-    private Button mainMenuButton_about;
-    private Button mainMenuButton_credits;
-    private Button mainMenuButton_quit;
+    // main scene buttons
+    private Button mainButtonPlay;
+    private Button mainButtonInstructions;
+    private Button mainButtonCredits;
+    private Button mainButtonQuit;
 
-    private Button winMenuButton_nextLevel;
-    private Button winMenuButton_mainMenu;
-    private Button winMenuButton_levelSelect;
+    // win menu scene buttons
+    private Button winButtonNextLevel;
+    private Button winButtonMainMenu;
+    private Button winButtonLevelSelect;
 
+<<<<<<< Assets/Scripts/UIManager.cs
     private Button level1Button_quit;
     private Button level1Button_mainMenu;
 
+=======
+    // ui in level selection scene
+>>>>>>> Assets/Scripts/UIManager.cs
     private Button level1Button;
     private Button level2Button;
+    private Dictionary<string, Image> badges;
     private Text level2Text;
     private GameObject lockImage;
+    // speed and gears badge for each level
+    private bool hasSpeedBadge1 = false;
+    private bool hasSpeedBadge2 = false;
+    private bool hasGearsBadge1 = false;
+    private bool hasGearsBadge2 = false;
 
     private static int totalLevels = 2;
     private static bool[] levels = new bool[totalLevels];
@@ -36,6 +48,7 @@ public class UIManager : MonoBehaviour
     private static int levelSelect = 3;
     private static int level1 = 4;
     private static int level2 = 5;
+    private static int howToPlay = 6;
 
     private void Awake()
     {
@@ -78,15 +91,17 @@ public class UIManager : MonoBehaviour
         GameObject go = uiDictionary["Canvas_Main_Menu"];
         go.SetActive(true);
 
-        mainMenuButton_quit = GameObject.Find("Button_Quit").GetComponent<Button>();
-        mainMenuButton_quit.onClick.AddListener(() => quitGame(0));
+        mainButtonQuit = GameObject.Find("Button_Quit").GetComponent<Button>();
+        mainButtonQuit.onClick.AddListener(() => quitGame(0));
 
-        mainMenuButton_about = GameObject.Find("Button_About").GetComponent<Button>();
-        // just testing scene transition, still need about scene
-        mainMenuButton_about.onClick.AddListener(() => loadSceneByNumber(winSceneIndex));
+        mainButtonInstructions = GameObject.Find("Button_Instructions").GetComponent<Button>();
+        mainButtonInstructions.onClick.AddListener(() => loadSceneByNumber(howToPlay));
 
-        mainMenuButton_play = GameObject.Find("Button_Play").GetComponent<Button>();
-        mainMenuButton_play.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+        mainButtonPlay = GameObject.Find("Button_Play").GetComponent<Button>();
+        mainButtonPlay.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+
+        mainButtonCredits = GameObject.Find("Button_Credits").GetComponent<Button>();
+        mainButtonCredits.onClick.AddListener(() => loadSceneByNumber(winSceneIndex));
     }
 
     public void loadSceneByNumber(int sceneNum)
@@ -120,6 +135,18 @@ public class UIManager : MonoBehaviour
         {
 
             activateCanvas("Canvas_Level_Selection");
+            //test this
+            if(badges == null)
+            {
+                badges = loadBadgesToDictionary();
+                //will need to use these during gameplay
+                //levels[0] = true;
+                //beatLevel1WithSpeed();
+                //beatLevel2WithSpeed();
+                //collectedAllGearsInLevel1();
+                //collectedAllGearsInLevel2();
+            }
+
             if(level1Button == null)
             {
                 level1Button = GameObject.Find("Button_Level_1").GetComponent<Button>();
@@ -144,8 +171,9 @@ public class UIManager : MonoBehaviour
                 lockImage = GameObject.Find("Lock");
             }
 
+            checkForBadges();
             // check if first level is beaten
-            if(levels[0] == true)
+            if (levels[0] == true)
             {
                 lockImage.SetActive(false);
                 level2Text.text = "Level 2";
@@ -153,6 +181,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                badges["Speed_Badge_Shadow_2"].enabled = false;
+                badges["Gears_Badge_Shadow_2"].enabled = false;
                 lockImage.SetActive(true);
                 level2Text.text = "";
                 level2Button.enabled = false;
@@ -180,28 +210,122 @@ public class UIManager : MonoBehaviour
         if(index == winSceneIndex)
         {
             activateCanvas("Canvas_Win");
-            if(winMenuButton_levelSelect == null)
+            if(winButtonLevelSelect == null)
             {
+<<<<<<< Assets/Scripts/UIManager.cs
                 winMenuButton_levelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
                 winMenuButton_levelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
                
+=======
+                winButtonLevelSelect = GameObject.Find("Button_Level_Selection").GetComponent<Button>();
+                winButtonLevelSelect.onClick.AddListener(() => loadSceneByNumber(levelSelect));
+>>>>>>> Assets/Scripts/UIManager.cs
             }
 
-            if(winMenuButton_mainMenu == null)
+            if(winButtonMainMenu == null)
             {
-                winMenuButton_mainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
-                winMenuButton_mainMenu.onClick.AddListener(() => loadSceneByNumber(mainMenu));
+                winButtonMainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
+                winButtonMainMenu.onClick.AddListener(() => loadSceneByNumber(mainMenu));
             }
 
-            if(winMenuButton_nextLevel == null)
+            if(winButtonNextLevel == null)
             {
-                winMenuButton_nextLevel = GameObject.Find("Button_Next_Level").GetComponent<Button>();
-                winMenuButton_nextLevel.onClick.AddListener(() => loadSceneByNumber(SceneManager.GetActiveScene().buildIndex + 1));
+                winButtonNextLevel = GameObject.Find("Button_Next_Level").GetComponent<Button>();
+                winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
     }
 
-    public void setLevelBeaten(int levelNumber)
+    public void checkForBadges()
+    {
+        if(hasGearsBadge1)
+        {
+            badges["Gears_Badge_1"].enabled = true;
+            badges["Gears_Badge_Shadow_1"].enabled = false;
+        }
+        else
+        {
+            badges["Gears_Badge_1"].enabled = false;
+            badges["Gears_Badge_Shadow_1"].enabled = true;
+        }
+
+        if (hasGearsBadge2)
+        {
+            badges["Gears_Badge_2"].enabled = true;
+            badges["Gears_Badge_Shadow_2"].enabled = false;
+        }
+        else
+        {
+            badges["Gears_Badge_2"].enabled = false;
+            badges["Gears_Badge_Shadow_2"].enabled = true;
+        }
+
+        if (hasSpeedBadge1)
+        {
+            badges["Speed_Badge_1"].enabled = true;
+            badges["Speed_Badge_Shadow_1"].enabled = false;
+        }
+        else
+        {
+            badges["Speed_Badge_1"].enabled = false;
+            badges["Speed_Badge_Shadow_1"].enabled = true;
+        }
+
+        if (hasSpeedBadge2)
+        {
+            badges["Speed_Badge_2"].enabled = true;
+            badges["Speed_Badge_Shadow_2"].enabled = false;
+        }
+        else
+        {
+            badges["Speed_Badge_2"].enabled = false;
+            badges["Speed_Badge_Shadow_2"].enabled = true;
+        }
+    }
+
+    public void beatLevel1WithSpeed()
+    {
+        hasSpeedBadge1 = true;
+    }
+
+    public void collectedAllGearsInLevel1()
+    {
+        hasGearsBadge1 = true;
+    }
+
+    public void beatLevel2WithSpeed()
+    {
+        hasSpeedBadge2 = true;
+    }
+
+    public void collectedAllGearsInLevel2()
+    {
+        hasGearsBadge2 = true;
+    }
+
+    public Dictionary<string,Image> loadBadgesToDictionary()
+    {
+        Dictionary<string, Image> imageDictionary = new Dictionary<string, Image>();
+        Image temp = GameObject.Find("Gears_Badge_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_Shadow_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_Shadow_1").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Gears_Badge_Shadow_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        temp = GameObject.Find("Speed_Badge_Shadow_2").GetComponent<Image>();
+        imageDictionary.Add(temp.name, temp);
+        return imageDictionary;
+    }
+
+    public void setLevelToBeaten(int levelNumber)
     {
         levels[levelNumber - 1] = true;
     }
