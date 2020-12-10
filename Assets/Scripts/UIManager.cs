@@ -19,10 +19,15 @@ public class UIManager : MonoBehaviour
     private Button mainButtonCredits;
     private Button mainButtonQuit;
 
-    // win menu scene buttons
+    // win menu scene ui
     private Button winButtonNextLevel;
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
+    private Image winSpeedBadge;
+    private Image winGearsBadge;
+    private Text winTextGears;
+    private Text winText;
+    private Text winTimeText;
 
     // HUD
     private Text hudGears;
@@ -166,12 +171,6 @@ public class UIManager : MonoBehaviour
             if(badges == null)
             {
                 badges = loadBadgesToDictionary();
-                //will need to use these during gameplay
-                //levels[0] = true;
-                //beatLevel1WithSpeed();
-                //beatLevel2WithSpeed();
-                //collectedAllGearsInLevel1();
-                //collectedAllGearsInLevel2();
             }
 
             if(level1Button == null)
@@ -276,16 +275,92 @@ public class UIManager : MonoBehaviour
                 winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(level2));
             }
 
+            if(winSpeedBadge == null)
+            {
+                winSpeedBadge = GameObject.Find("Speed_Badge").GetComponent<Image>();
+            }
+
+            if(winGearsBadge == null)
+            {
+                winGearsBadge = GameObject.Find("Gears_Badge").GetComponent<Image>();
+            }
+
+            if (winText == null)
+            {
+                winText = GameObject.Find("Won_Text").GetComponent<Text>();
+            }
+
+            winText.text = "You Beat Level " + (levelManager.getCurrentLevel() - 3).ToString() + "!";
+
+            checkToDisplayBadges();
+
+            if(winTextGears == null)
+            {
+                winTextGears = GameObject.Find("Gears_Info").GetComponent<Text>();
+                winTextGears.text = levelManager.getGearsStatus();
+            }
+
             if(levelManager.getCurrentLevel() == level2)
             {
                 winButtonNextLevel.enabled = false;
             }
+
+            if(winTimeText == null)
+            {
+                winTimeText = GameObject.Find("Time_Info").GetComponent<Text>();
+            }
+            winTimeText.text = timer.getTimeUsedString();
         }
 
         // lose scene
         if(index == loseSceneIndex)
         {
             setAllCanvasesToInactive();
+        }
+    }
+
+    public void checkToDisplayBadges()
+    {
+        if (levelManager.getCurrentLevel() == level1)
+        {
+            if (hasSpeedBadge1)
+            {
+                winSpeedBadge.enabled = true;
+            }
+            else
+            {
+                winSpeedBadge.enabled = false;
+            }
+
+            if (hasGearsBadge1)
+            {
+                winGearsBadge.enabled = true;
+            }
+            else
+            {
+                winGearsBadge.enabled = false;
+            }
+        }
+        else if (levelManager.getCurrentLevel() == level2)
+        {
+
+            if (hasSpeedBadge2)
+            {
+                winSpeedBadge.enabled = true;
+            }
+            else
+            {
+                winSpeedBadge.enabled = false;
+            }
+
+            if (hasGearsBadge2)
+            {
+                winGearsBadge.enabled = true;
+            }
+            else
+            {
+                winGearsBadge.enabled = false;
+            }
         }
     }
 

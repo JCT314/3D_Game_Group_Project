@@ -96,6 +96,17 @@ public class TimerManager : MonoBehaviour
         return totalTime;
     }
 
+    public string getTimeUsedString()
+    {
+        int totalTime = (int)resetTime - totalSecondsLeft;
+        int minutes;
+        int seconds;
+        minutes = totalTime / 60;
+        seconds = totalTime % 60;
+        string time = minutes.ToString() + ":" + (seconds < 10 ? "0" : "") + seconds;
+        return time;
+    }
+
     public bool didPlayerBeatLevelInTime()
     {
         return getTimeUsedToBeatLevel() >= timeGoal;
