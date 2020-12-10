@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<string, GameObject> uiDictionary;
     private TimerManager timer;
+    private LevelManager levelManager;
 
     // main scene buttons
     private Button mainButtonPlay;
@@ -18,15 +19,21 @@ public class UIManager : MonoBehaviour
     private Button mainButtonCredits;
     private Button mainButtonQuit;
 
-    // win menu scene buttons
+    // win menu scene ui
     private Button winButtonNextLevel;
     private Button winButtonMainMenu;
     private Button winButtonLevelSelect;
+    private Image winSpeedBadge;
+    private Image winGearsBadge;
+    private Text winTextGears;
+    private Text winText;
+    private Text winTimeText;
 
     // HUD
     private Text hudGears;
     private Text hudTime;
 
+    // level 1 buttons
     private Button level1Button_quit;
     private Button level1Button_mainMenu;
 
@@ -50,6 +57,7 @@ public class UIManager : MonoBehaviour
     private static int level1 = 4;
     private static int level2 = 5;
     private static int howToPlay = 6;
+    private static int loseSceneIndex = 7;
 
     private void Awake()
     {
@@ -57,6 +65,7 @@ public class UIManager : MonoBehaviour
         {
             uiDictionary = new Dictionary<string, GameObject>();
             timer = GameObject.Find("TimerManager").GetComponent<TimerManager>();
+            levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
             _instance = this;
             DontDestroyOnLoad(this);
@@ -82,7 +91,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
-        if(currentIndex == level1 || currentIndex == level2)
+        if (currentIndex == level1 || currentIndex == level2)
         {
             updateHUD();
         }
@@ -91,7 +100,7 @@ public class UIManager : MonoBehaviour
     private void updateHUD()
     {
         hudTime.text = "TIME " + timer.getTimeRemaining();
-        hudGears.text = "GEARS: " + "need to add gears";
+        hudGears.text = "GEARS: " + levelManager.getGearsStatus();
     }
 
     public void setAllCanvasesToInactive()
@@ -151,7 +160,7 @@ public class UIManager : MonoBehaviour
         if (index == mainMenu)
         {
             activateCanvas("Canvas_Main_Menu");
-        }  
+        }
 
         // inside level selection scene
         if(index == levelSelect)
@@ -162,12 +171,6 @@ public class UIManager : MonoBehaviour
             if(badges == null)
             {
                 badges = loadBadgesToDictionary();
-                //will need to use these during gameplay
-                //levels[0] = true;
-                //beatLevel1WithSpeed();
-                //beatLevel2WithSpeed();
-                //collectedAllGearsInLevel1();
-                //collectedAllGearsInLevel2();
             }
 
             if(level1Button == null)
@@ -220,7 +223,7 @@ public class UIManager : MonoBehaviour
                 Debug.Log("clicked main menu");
                 level1Button_mainMenu = GameObject.Find("Button_Main_Menu").GetComponent<Button>();
                 level1Button_mainMenu.onClick.AddListener(() => loadSceneByNumber(1));
-                
+
             }
             if(level1Button_quit == null)
             {
@@ -230,7 +233,7 @@ public class UIManager : MonoBehaviour
         }
 
         // still need level 2
-        if(index == level2)
+        if (index == level2)
         {
 
         }
@@ -269,7 +272,94 @@ public class UIManager : MonoBehaviour
             if(winButtonNextLevel == null)
             {
                 winButtonNextLevel = GameObject.Find("Button_Next_Level").GetComponent<Button>();
-                winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(SceneManager.GetActiveScene().buildIndex + 1));
+                winButtonNextLevel.onClick.AddListener(() => loadSceneByNumber(level2));
+            }
+
+            if(winSpeedBadge == null)
+            {
+                winSpeedBadge = GameObject.Find("Speed_Badge").GetComponent<Image>();
+            }
+
+            if(winGearsBadge == null)
+            {
+                winGearsBadge = GameObject.Find("Gears_Badge").GetComponent<Image>();
+            }
+
+            if (winText == null)
+            {
+                winText = GameObject.Find("Won_Text").GetComponent<Text>();
+            }
+
+            winText.text = "You Beat Level " + (levelManager.getCurrentLevel() - 3).ToString() + "!";
+
+            checkToDisplayBadges();
+
+            if(winTextGears == null)
+            {
+                winTextGears = GameObject.Find("Gears_Info").GetComponent<Text>();
+                winTextGears.text = levelManager.getGearsStatus();
+            }
+
+            if(levelManager.getCurrentLevel() == level2)
+            {
+                winButtonNextLevel.enabled = false;
+            }
+
+            if(winTimeText == null)
+            {
+                winTimeText = GameObject.Find("Time_Info").GetComponent<Text>();
+            }
+            winTimeText.text = timer.getTimeUsedString();
+        }
+
+        // lose scene
+        if(index == loseSceneIndex)
+        {
+            setAllCanvasesToInactive();
+        }
+    }
+
+    public void checkToDisplayBadges()
+    {
+        if (levelManager.getCurrentLevel() == level1)
+        {
+            if (hasSpeedBadge1)
+            {
+                winSpeedBadge.enabled = true;
+            }
+            else
+            {
+                winSpeedBadge.enabled = false;
+            }
+
+            if (hasGearsBadge1)
+            {
+                winGearsBadge.enabled = true;
+            }
+            else
+            {
+                winGearsBadge.enabled = false;
+            }
+        }
+        else if (levelManager.getCurrentLevel() == level2)
+        {
+
+            if (hasSpeedBadge2)
+            {
+                winSpeedBadge.enabled = true;
+            }
+            else
+            {
+                winSpeedBadge.enabled = false;
+            }
+
+            if (hasGearsBadge2)
+            {
+                winGearsBadge.enabled = true;
+            }
+            else
+            {
+                winGearsBadge.enabled = false;
             }
         }
     }
@@ -371,6 +461,11 @@ public class UIManager : MonoBehaviour
     public void showWinScene()
     {
         loadSceneByNumber(winSceneIndex);
+    }
+
+    public void showLoseScene()
+    {
+        loadSceneByNumber(loseSceneIndex);
     }
 
     public void quitGame(int ignoreLevel)
