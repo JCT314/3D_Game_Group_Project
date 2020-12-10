@@ -11,7 +11,7 @@ public class TimerManager : MonoBehaviour
     private int level2 = 5;
     private int timeGoal = -1;
     private float totalTimeForLevel1 = 20f;
-    private int timeToBeatLevel1 = 9;
+    private int timeToBeatLevel1 = 10;
     // need to adjust level 2
     private float totalTimeForLevel2 = 10f;
     private int timeToBeatLevel2 = 20;
@@ -109,7 +109,7 @@ public class TimerManager : MonoBehaviour
 
     public bool didPlayerBeatLevelInTime()
     {
-        return getTimeUsedToBeatLevel() >= timeGoal;
+        return getTimeUsedToBeatLevel() <= timeGoal;
     }
 
     public void resetTimer()
