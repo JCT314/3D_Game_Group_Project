@@ -453,7 +453,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 24.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1046,7 +1046,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1265103766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1808262072}
+        m_MethodName: loadBack
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1265103766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,10 +1308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1389d76b0400ee643a41eddc157f7e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere: {fileID: 0}
-  instruction: {fileID: 0}
-  amount: 0
-  speed: 2
 --- !u!4 &1808262073
 Transform:
   m_ObjectHideFlags: 0
