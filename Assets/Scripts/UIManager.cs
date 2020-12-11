@@ -302,7 +302,7 @@ public class UIManager : MonoBehaviour
 
             if(levelManager.getCurrentLevel() == level2)
             {
-                winButtonNextLevel.enabled = false;
+                winButtonNextLevel.gameObject.SetActive(false);
             }
 
             if(winTimeText == null)
