@@ -8638,6 +8638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 1
+  velocity: 3
 --- !u!54 &1220622575
 Rigidbody:
   m_ObjectHideFlags: 0

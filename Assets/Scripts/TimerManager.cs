@@ -13,8 +13,8 @@ public class TimerManager : MonoBehaviour
     private float totalTimeForLevel1 = 20f;
     private int timeToBeatLevel1 = 10;
     // need to adjust level 2
-    private float totalTimeForLevel2 = 10f;
-    private int timeToBeatLevel2 = 20;
+    private float totalTimeForLevel2 = 60f;
+    private int timeToBeatLevel2 = 45;
     private float resetTime;
     public static TimerManager _instance;
     public UIManager uiManager;

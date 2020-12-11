@@ -297,8 +297,8 @@ public class UIManager : MonoBehaviour
             if(winTextGears == null)
             {
                 winTextGears = GameObject.Find("Gears_Info").GetComponent<Text>();
-                winTextGears.text = levelManager.getGearsStatus();
             }
+            winTextGears.text = levelManager.getGearsStatus();
 
             if(levelManager.getCurrentLevel() == level2)
             {

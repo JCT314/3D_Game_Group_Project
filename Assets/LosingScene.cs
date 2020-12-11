@@ -9,6 +9,8 @@ public class LosingScene : MonoBehaviour
     public Button menu_button;
     public Button quit_button;
     public Button retry_button;
+    private int lastLevelPlayed = 1;
+    private LevelManager levelManager;
 
     void Awake()
     {
@@ -18,10 +20,13 @@ public class LosingScene : MonoBehaviour
 
         retry_button = GameObject.Find("Retry_Button").GetComponent<Button>();
 
-        retry_button.onClick.AddListener(() => SceneManager.LoadScene(4));
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        lastLevelPlayed = levelManager.getCurrentLevel();
+        retry_button.onClick.AddListener(() => SceneManager.LoadScene(lastLevelPlayed));
 
         quit_button = GameObject.Find("Quit_Button").GetComponent<Button>();
         quit_button.onClick.AddListener(() => quitGame(0));
+
     }
 
     public void quitGame(int ignoreLevel)
