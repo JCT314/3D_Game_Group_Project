@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Button
   - Gear
+  - AudioController
   layers:
   - Default
   - TransparentFX
