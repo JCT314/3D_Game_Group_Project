@@ -1751,7 +1751,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Beat this level under 30 seconds to unlock this badge!
+  m_Text: Beat this level in 45 seconds or less to unlock this badge!
 --- !u!1 &5836327180653441563
 GameObject:
   m_ObjectHideFlags: 0

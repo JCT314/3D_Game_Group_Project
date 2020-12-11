@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
     private static int level2 = 5;
     private static int howToPlay = 6;
     private static int loseSceneIndex = 7;
-
+    private static int credits = 8;
     private void Awake()
     {
         if (_instance == null)
@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
         mainButtonPlay.onClick.AddListener(() => loadSceneByNumber(levelSelect));
 
         mainButtonCredits = GameObject.Find("Button_Credits").GetComponent<Button>();
-        mainButtonCredits.onClick.AddListener(() => loadSceneByNumber(winSceneIndex));
+        mainButtonCredits.onClick.AddListener(() => loadSceneByNumber(credits));
     }
 
     public void loadSceneByNumber(int sceneNum)
@@ -314,6 +314,11 @@ public class UIManager : MonoBehaviour
 
         // lose scene
         if(index == loseSceneIndex)
+        {
+            setAllCanvasesToInactive();
+        }
+
+        if(index == howToPlay)
         {
             setAllCanvasesToInactive();
         }

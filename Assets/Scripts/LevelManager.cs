@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     private int level1 = 4;
     private int level2 = 5;
     public static int gearsInLevel1 = 5;
-    public static int gearsInLevel2 = 7;
+    public static int gearsInLevel2 = 5;
     public int gearsCollected = 0;
     public int currentLevel = -1;
     // Start is called before the first frame update
