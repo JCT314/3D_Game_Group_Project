@@ -15,17 +15,7 @@ public class Platform2_Tilt : MonoBehaviour
     void Update()
     {
         tiltMax = GetComponent<Transform>().eulerAngles;
-        //Up-Arrow
-        /* if (Input.GetAxis("Horizontal") > .2 && (tiltMax.z <= 6 || tiltMax.z >= 350))
-         {
-             transform.Rotate(1, 0, 0);
-         }
-         //Down-Arrow
-         if (Input.GetAxis("Horizontal") < -.2 && (tiltMax.z >= 351 || tiltMax.z <= 7))
-         {
-             transform.Rotate(-1, 0, 0);
-         }*/
-        //Right-Arrow
+        
         if (Input.GetAxis("Vertical") > .2 && (tiltMax.x <= 8 || tiltMax.x >= 350))
         {
             transform.Rotate(0, 0, -1);
@@ -33,7 +23,6 @@ public class Platform2_Tilt : MonoBehaviour
         //Left-Arrow
         if (Input.GetAxis("Vertical") < -.2 && (tiltMax.x >= 351 || tiltMax.x <= 9))
         {
-
             transform.Rotate(0, 0, 1);
         }
     }
